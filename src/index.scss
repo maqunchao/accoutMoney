@@ -1,0 +1,27 @@
+@import-normalize;
+@import "helper.scss";
+*{
+    margin: 0; padding: 0;
+}
+
+*{
+    box-sizing: border-box;
+}
+*::before{
+    box-sizing: border-box;
+}
+*::after{
+    box-sizing: border-box;
+}
+ul, ol{
+    list-style: none;
+}
+a{
+    text-decoration: none;  //消除a标签下划线
+}
+
+body{
+    font-family: $font-hei;
+    font-size: 16px;
+    line-height: 1.2;
+}
