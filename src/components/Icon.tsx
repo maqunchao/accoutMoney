@@ -7,13 +7,15 @@ try {importAll(require.context('icons', true, /\.svg$/));} catch (error) {consol
 // require("icons/tag.svg");
 // require("icons/chart.svg");
 
+//Tree-shaking  所以使用require
+
 type Props = {
     name:string
 }
 
 const Icon = (props:Props)=>{
     return (
-        <svg fill="red" className="icon">
+        <svg  className="icon">
             <use xlinkHref={'#' + props.name} />
           </svg>
       );
