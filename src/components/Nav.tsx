@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Icon from "./Icon";
 
 //treeShaking 不适用于require
@@ -25,6 +25,12 @@ const NavWrapper = styled.nav`
           width: 22px;
           height: 22px;
         }
+        &.selected{
+          color:red;
+          .icon{
+            fill:red;
+          }
+        }
       }
     }
   }
@@ -35,22 +41,32 @@ const Nav = () => {
     <NavWrapper>
       <ul>
         <li>
-          <Link to="/tags">
+          <NavLink 
+            to="/tags"
+            className={({ isActive }) => (isActive ? 'selected' : 'unselected')}
+
+          >
             <Icon name="tag" />
-            标签页
-          </Link>
+            标签页1
+          </NavLink>
         </li>
         <li>
-          <Link to="/money">
+          <NavLink 
+            to="/money"
+            className={({ isActive }) => (isActive ? 'selected' : 'unselected')}
+          >
             <Icon name="money" />
             记账页
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="/statistics">
+          <NavLink 
+            to="/statistics"
+            className={({ isActive }) => (isActive ? 'selected' : 'unselected')}
+          >
             <Icon name="chart" />
             统计页
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </NavWrapper>
