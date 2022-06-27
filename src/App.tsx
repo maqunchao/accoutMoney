@@ -1,7 +1,9 @@
 import React from "react";
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
-import styled from "styled-components";
-import Layout from "./components/Layout";
+import Tags from 'views/Tags';
+import Money from 'views/Money';
+import Statistics from 'views/Statistics';
+import NoMathch from "views/NoMathch";
 
 function App() {
   return (
@@ -14,39 +16,13 @@ function App() {
         {/* 👇️ only match this when no other routes match */}
         <Route
           path="*"
-          element={
-            <div>
-              <h2>404 Page not found</h2>
-            </div>
-          }
+          element={<NoMathch />}
         />
       </Routes>
     </HashRouter>
   );
 }
 
-function Tags() {
-  return (
-    <Layout>
-      <h2>标签页面</h2>;
-    </Layout>
-  );
-}
 
-function Money() {
-  return (
-    <Layout>
-      <h2>记账页面</h2>;
-    </Layout>
-  );
-}
-
-function Statistics() {
-  return (
-    <Layout>
-      <h2>统计页面</h2>;
-    </Layout>
-  );
-}
 
 export default App;
