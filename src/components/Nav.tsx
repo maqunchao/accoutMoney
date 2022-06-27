@@ -43,7 +43,7 @@ const Nav = () => {
           <Link to="/money">记账页</Link>
         </li>
         <li>
-          <Icon name="statistics" />
+          <Icon name="chart" />
 
           <Link to="/statistics">统计页</Link>
         </li>
