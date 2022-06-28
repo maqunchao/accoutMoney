@@ -64,7 +64,7 @@ const Nav = () => {
             to="/statistics"
             className={({ isActive }) => (isActive ? 'selected' : 'unselected')}
           >
-            <Icon name="chart" />
+            <Icon name="charts" />
             统计页
           </NavLink>
         </li>
