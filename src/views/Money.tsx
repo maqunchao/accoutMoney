@@ -70,7 +70,22 @@ const CategorySection = styled.section`
   }
 `;
 
-const NumberPadSection = styled.section``;
+const NumberPadSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  > .output{
+    background: white;
+    font-size: 36px;
+    line-height: 72px;
+    text-align: right;
+    padding: 0 16px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.25);
+
+  }
+  > .pad {
+
+  }
+`;
 
 const MyLayout = styled(Layout)`
   display: flex;
@@ -102,8 +117,10 @@ function Money() {
         </ul>
       </CategorySection>
       <NumberPadSection>
-        <div>100</div>
-        <div>
+        <div className="output">
+          100
+        </div>
+        <div className="pad">
           <button>1</button>
           <button>2</button>
           <button>3</button>
