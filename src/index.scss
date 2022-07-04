@@ -36,3 +36,11 @@ body{
     height: 1rem;
     display: inline-block;
 }
+
+//因为键盘按钮内部设置 float 浮动后, 外层的元素要设置清除浮动, 要不然父元素高度塌陷, 视觉上边框是一条线,
+.clearfix::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+//还有假如在父元素上再包一层元素, 该元素设置flex布局, 则不会高度坍塌

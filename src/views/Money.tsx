@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Layout from "../components/Layout";
 import styled from "styled-components";
 import {CategorySection} from './Money/CategorySection';
@@ -56,7 +56,7 @@ function Money() {
           <button>9</button>
           <button className="ok">OK</button>
           <button className="zero">0</button>
-          <button>.</button>
+          <button className="dot">.</button>
         </div>
       </NumberPadSection>
     </MyLayout>

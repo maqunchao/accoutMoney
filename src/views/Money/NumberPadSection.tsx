@@ -13,6 +13,8 @@ const NumberPadSection = styled.section`
                 inset 0 5px 5px -5px rgba(0,0,0,0.25);
 
   }
+
+  //&.是替换 父类选择器的简写 
   > .pad {
     > button{
       font-size:  18px; float:left; width:25%; height:64px; border: none;
