@@ -9,23 +9,17 @@ import {NumberPadSection} from "./Money/NumberPadSection";
 
 
 
+//单独设置money页面高度样式
 const MyLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
+  border:1px  solid red;
 `;
 
 function Money() {
   return (
     <MyLayout>
-      <TagsSection>
-        <ol>
-          <li>衣</li>
-          <li>食</li>
-          <li>住</li>
-          <li>行</li>
-        </ol>
-        <button>新增标签</button>
-      </TagsSection>
+      <TagsSection/>
       <NoteSection>
         <label>
           <span>备注</span>

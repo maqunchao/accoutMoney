@@ -1,8 +1,19 @@
 import styled from "styled-components";
+import React, {useState} from "react";
 
-const TagsSection = styled.section`
+type Props = {
+  value: string[];
+  onChange: (selected: string[]) => void;
+};
+
+const Wrapper = styled.section`
   background: #ffffff;
   padding: 12px 16px;
+  flex-grow: 1; //如果有空间, 就给该标签尽可能高的高度
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
   > ol {
     margin: 0 -12px;
     > li {
@@ -24,5 +35,29 @@ const TagsSection = styled.section`
   }
 `;
 
+type Props2 = {
+  children: any;
+};
+
+const TagsSection: React.FC = (props) => {
+    const[tags, setTags] = useState<string[]>(["衣", "食", "住", ])
+    const onAddTag = ()=>{
+        const tagName = window.prompt('新增标签');
+        if(tagName !==  null ){
+            setTags([...tags, tagName])
+        }
+
+    }
+  return (
+    <Wrapper>
+       <ol>
+          {
+            tags.map(tag => <li key={tag}>{tag}</li>)
+          }
+        </ol>
+        <button onClick={onAddTag}>新增标签</button>
+    </Wrapper>
+  );
+};
 
 export { TagsSection };
