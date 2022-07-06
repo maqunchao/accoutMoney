@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 type Props = {
   value: string[];
@@ -23,6 +23,9 @@ const Wrapper = styled.section`
       padding: 3px 18px;
       font-size: 14px;
       margin: 8px 12px;
+      &.selected{
+        background:red;
+      }
     }
   }
   > button {
@@ -40,22 +43,41 @@ type Props2 = {
 };
 
 const TagsSection: React.FC = (props) => {
-    const[tags, setTags] = useState<string[]>(["衣", "食", "住", ])
-    const onAddTag = ()=>{
-        const tagName = window.prompt('新增标签');
-        if(tagName !==  null ){
-            setTags([...tags, tagName])
-        }
-
+  const [tags, setTags] = useState<string[]>(["衣", "食", "住"]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const onAddTag = () => {
+    const tagName = window.prompt("新增标签");
+    if (tagName !== null) {
+      setTags([...tags, tagName]);
     }
+  };
+  const onToggleTag = (tag: string) => {
+    const index = selectedTags.indexOf(tag);
+    if (index >= 0) {
+      //如果tag已被选择, 则筛选出其他没被选中的tag, 复制一份当做新的selectedTag
+      setSelectedTags(selectedTags.filter((t) => t !== tag));
+    } else {
+      setSelectedTags([...selectedTags, tag]);
+    }
+  };
   return (
     <Wrapper>
-       <ol>
-          {
-            tags.map(tag => <li key={tag}>{tag}</li>)
-          }
-        </ol>
-        <button onClick={onAddTag}>新增标签</button>
+      <ol>
+        {tags.map((tag) => (
+          <li
+            key={tag}
+            onClick={() => {
+              onToggleTag(tag);
+            }}
+            className={
+              selectedTags.indexOf(tag) >= 0 ? "selected" : ""
+            }
+          >
+            {tag}
+          </li>
+        ))}
+      </ol>
+      <button onClick={onAddTag}>新增标签</button>
     </Wrapper>
   );
 };
