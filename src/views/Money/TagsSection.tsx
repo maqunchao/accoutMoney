@@ -60,6 +60,11 @@ const TagsSection: React.FC = (props) => {
       setSelectedTags([...selectedTags, tag]);
     }
   };
+  //抽取className, 做选中处理
+  const getClass = (tag:string)=>{
+    return selectedTags.indexOf(tag) >= 0 ? "selected" : "";
+  }
+
   return (
     <Wrapper>
       <ol>
@@ -69,9 +74,7 @@ const TagsSection: React.FC = (props) => {
             onClick={() => {
               onToggleTag(tag);
             }}
-            className={
-              selectedTags.indexOf(tag) >= 0 ? "selected" : ""
-            }
+            className={getClass(tag)}
           >
             {tag}
           </li>
