@@ -16,7 +16,14 @@ const MyLayout = styled(Layout)`
   border:1px  solid red;
 `;
 
+type Category = '-' | '+';
+
 function Money() {
+  const [selected, setSelected] = useState({
+    tags:[] as string[],
+    note: '',
+    category: '-' as Category
+  })
   return (
     <MyLayout>
       <TagsSection/>

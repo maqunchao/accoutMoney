@@ -26,7 +26,7 @@ const NumberPadSection: React.FC = () => {
       return;
     }
     if('0123456789.'.split('').concat(['删除', '清空']).indexOf(text) >= 0){
-      genertateOutput(text, output);
+      setOutput(genertateOutput(text, output));
 
     }
    
