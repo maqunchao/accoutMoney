@@ -1,11 +1,6 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 
-type Props = {
-  value: string[];
-  onChange: (selected: string[]) => void;
-};
-
 const Wrapper = styled.section`
   background: #ffffff;
   padding: 12px 16px;
@@ -23,8 +18,8 @@ const Wrapper = styled.section`
       padding: 3px 18px;
       font-size: 14px;
       margin: 8px 12px;
-      &.selected{
-        background:red;
+      &.selected {
+        background: red;
       }
     }
   }
@@ -38,13 +33,15 @@ const Wrapper = styled.section`
   }
 `;
 
-type Props2 = {
-  children: any;
+type Props = {
+  // value: string[];
+  value: string[];
+  onChange: (selected: string[]) => void;
 };
-
-const TagsSection: React.FC = (props) => {
+const TagsSection: React.FC<Props> = (props) => {
   const [tags, setTags] = useState<string[]>(["衣", "食", "住"]);
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  // const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const selectedTags = props.value;
   const onAddTag = () => {
     const tagName = window.prompt("新增标签");
     if (tagName !== null) {
@@ -55,15 +52,15 @@ const TagsSection: React.FC = (props) => {
     const index = selectedTags.indexOf(tag);
     if (index >= 0) {
       //如果tag已被选择, 则筛选出其他没被选中的tag, 复制一份当做新的selectedTag
-      setSelectedTags(selectedTags.filter((t) => t !== tag));
+      props.onChange(selectedTags.filter((t) => t !== tag));
     } else {
-      setSelectedTags([...selectedTags, tag]);
+      props.onChange([...selectedTags, tag]);
     }
   };
   //抽取className, 做选中处理
-  const getClass = (tag:string)=>{
+  const getClass = (tag: string) => {
     return selectedTags.indexOf(tag) >= 0 ? "selected" : "";
-  }
+  };
 
   return (
     <Wrapper>
