@@ -26,13 +26,20 @@ const Wrapper = styled.section`
   }
 `;
 
-const CategorySection: React.FC = () => {
+type Props = {
+  value : '-' | '+';
+  onChange:(value:'-' | '+') => void;
+}
+
+
+const CategorySection: React.FC<Props> = (props) => {
   const categoryMap = {'-':'支出','+':'收入' }
   type Keys = keyof typeof categoryMap;
   //const [categoryList] = useState<('-' | '+')[]>(['-', '+']);  //categoryList这个类型进行收缩到 只有-和+
   const [categoryList] = useState<Keys[]>(['-', '+']);  //categoryList这个类型进行收缩到 只有-和+
-
-  const [category, setCategory] = useState("-");
+  
+  // const [category, setCategory] = useState("-");
+  const category = props.value;
 
 
   return (
@@ -45,7 +52,7 @@ const CategorySection: React.FC = () => {
               key={x}
               className={category === x ? "selected" : ""}
               onClick={() => {
-                setCategory(x);
+                props.onChange(x);
               }}
             >
               {categoryMap[x]}

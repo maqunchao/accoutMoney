@@ -3,17 +3,28 @@ import styled from "styled-components";
 import { Wrapper } from "./NumberPadSection/Wrapper";
 import { genertateOutput } from "./NumberPadSection/genertateOutput";
 
-const NumberPadSection: React.FC = () => {
-  const [output, _setOutput] = useState("0");
+type Props = {
+  value: number;
+  onChange:(value:number) => void;
+  onOK?:()=>void;
+}
+
+
+const NumberPadSection: React.FC<Props> = (props) => {
+  // const [output, _setOutput] = useState("0");
+const output = props.value.toString();
 
   //统一处理输入框数字长度问题, 并且长度为0时, 重置为0
   const setOutput = (output: string) => {
+    let value
     if (output.length > 16) {
-      output = output.slice(0, 16);
+      value = parseFloat( output.slice(0, 16));
     } else if (output.length === 0) {
-      output = "0";
+      value =  0;
+    } else {
+      value = parseFloat(output);
     }
-    _setOutput(output);
+    props.onChange(value);
   };
 
   const onClickButtonWrapper = (e: React.MouseEvent) => {
@@ -21,6 +32,13 @@ const NumberPadSection: React.FC = () => {
     // console.log("e", (e.target as HTMLButtonElement).textContent);
     const text = (e.target as HTMLButtonElement).textContent;
     if (text === null) {
+      return;
+    }
+    if(text === 'OK') {
+      if(props.onOK){
+        props.onOK()
+
+      }
       return;
     }
     if ("0123456789.".split("").concat(["删除", "清空"]).indexOf(text) >= 0) {

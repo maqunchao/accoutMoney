@@ -22,6 +22,16 @@ function Money() {
     category: "-" as Category,
     amount: 0,
   });
+
+
+  // value={selected.note}
+  //       onChange={(note) =>
+  //         setSelected({
+  //           ...selected,
+  //           note: note,
+  //         })
+
+
   return (
     <MyLayout>
       {selected.tags.join("")}
@@ -44,8 +54,25 @@ function Money() {
           })
         }
       />
-      <CategorySection />
-      <NumberPadSection />
+      <CategorySection 
+      value={selected.category}
+      onChange={(category) =>
+        setSelected({
+          ...selected,
+          category: category,
+        })
+      }
+      />
+       <NumberPadSection 
+        value={selected.amount}
+        onChange={(amount) =>
+          setSelected({
+            ...selected,
+            amount: amount,
+          })
+        }
+        onOK= {()=>{}}
+      />
     </MyLayout>
   );
 }
