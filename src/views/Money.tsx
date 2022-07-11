@@ -5,6 +5,7 @@ import { CategorySection } from "./Money/CategorySection";
 import { TagsSection } from "./Money/TagsSection";
 import { NoteSection } from "./Money/NoteSection";
 import { NumberPadSection } from "./Money/NumberPadSection";
+import { types } from "@babel/core";
 
 //单独设置money页面高度样式
 const MyLayout = styled(Layout)`
@@ -23,7 +24,7 @@ function Money() {
     amount: 0,
   });
 
-
+  //优化onChange
   // value={selected.note}
   //       onChange={(note) =>
   //         setSelected({
@@ -31,6 +32,15 @@ function Money() {
   //           note: note,
   //         })
 
+  type Selected = typeof selected;
+
+  //obj是Selected的一部分
+  const onChange = (obj: Partial<Selected>) => {
+    setSelected({
+      ...selected,
+      ...obj,
+    });
+  };
 
   return (
     <MyLayout>
@@ -54,16 +64,16 @@ function Money() {
           })
         }
       />
-      <CategorySection 
-      value={selected.category}
-      onChange={(category) =>
-        setSelected({
-          ...selected,
-          category: category,
-        })
-      }
+      <CategorySection
+        value={selected.category}
+        onChange={(category) =>
+          setSelected({
+            ...selected,
+            category: category,
+          })
+        }
       />
-       <NumberPadSection 
+      <NumberPadSection
         value={selected.amount}
         onChange={(amount) =>
           setSelected({
@@ -71,7 +81,7 @@ function Money() {
             amount: amount,
           })
         }
-        onOK= {()=>{}}
+        onOK={() => {}}
       />
     </MyLayout>
   );
