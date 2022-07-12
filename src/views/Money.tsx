@@ -32,10 +32,9 @@ function Money() {
   //           note: note,
   //         })
 
-  type Selected = typeof selected;
-
   //obj是Selected的一部分
-  const onChange = (obj: Partial<Selected>) => {
+
+  const onChange = (obj: Partial<typeof selected>) => {
     setSelected({
       ...selected,
       ...obj,
@@ -46,26 +45,19 @@ function Money() {
     <MyLayout>
       {selected.tags.join("")}
       {selected.note}
+      {selected.category}
+      {selected.amount}
       <TagsSection
         value={selected.tags}
-        onChange={(tags) =>
-          setSelected({
-            ...selected,
-            tags: tags,
-          })
-        }
+        onChange={(tags) => onChange({ tags })}
       />
       <NoteSection
         value={selected.note}
-        onChange={(note) =>
-          setSelected({
-            ...selected,
-            note: note,
-          })
-        }
+        onChange={(note) => onChange({ note })}
       />
       <CategorySection
         value={selected.category}
+<<<<<<< HEAD
         onChange={(category) =>
           setSelected({
             ...selected,
@@ -81,6 +73,13 @@ function Money() {
             amount: amount,
           })
         }
+=======
+        onChange={(category) => onChange({ category })}
+      />
+      <NumberPadSection
+        value={selected.amount}
+        onChange={(amount) => onChange({ amount })}
+>>>>>>> dc62602a68da40142a316b160a0fc6c7fb7b93d0
         onOK={() => {}}
       />
     </MyLayout>
