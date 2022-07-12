@@ -57,29 +57,11 @@ function Money() {
       />
       <CategorySection
         value={selected.category}
-<<<<<<< HEAD
-        onChange={(category) =>
-          setSelected({
-            ...selected,
-            category: category,
-          })
-        }
-      />
-      <NumberPadSection
-        value={selected.amount}
-        onChange={(amount) =>
-          setSelected({
-            ...selected,
-            amount: amount,
-          })
-        }
-=======
         onChange={(category) => onChange({ category })}
       />
       <NumberPadSection
         value={selected.amount}
         onChange={(amount) => onChange({ amount })}
->>>>>>> dc62602a68da40142a316b160a0fc6c7fb7b93d0
         onOK={() => {}}
       />
     </MyLayout>
