@@ -44,3 +44,9 @@ body{
     clear: both;
 }
 //还有假如在父元素上再包一层元素, 该元素设置flex布局, 则不会高度坍塌
+
+.oneLine{
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
