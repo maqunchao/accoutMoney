@@ -45,7 +45,7 @@ function Money() {
       {/* {selected.tags.join("")}
       {selected.note}
       {selected.category} */}
-      {selected.amount}
+      {/* {selected.amount} */}
       <TagsSection
         value={selected.tagIds}
         onChange={(tagIds) => onChange({ tagIds })}

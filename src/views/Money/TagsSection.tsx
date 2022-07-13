@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import { useTags } from "useTags";
+import { creatId } from "../../lib/creatId";
 const Wrapper = styled.section`
   background: #ffffff;
   padding: 12px 16px;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -51,7 +53,7 @@ const TagsSection: React.FC<Props> = (props) => {
   const onAddTag = () => {
     const tagName = window.prompt("新增标签");
     if (tagName !== null) {
-      setTags([...tags, { id: Math.random(), name: tagName }]);
+      setTags([...tags, { id: creatId(), name: tagName }]);
     }
   };
   const onToggleTag = (tagId: number) => {
