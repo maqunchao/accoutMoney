@@ -5,7 +5,6 @@ import { CategorySection } from "./Money/CategorySection";
 import { TagsSection } from "./Money/TagsSection";
 import { NoteSection } from "./Money/NoteSection";
 import { NumberPadSection } from "./Money/NumberPadSection";
-import { types } from "@babel/core";
 
 //单独设置money页面高度样式
 const MyLayout = styled(Layout)`
@@ -18,7 +17,7 @@ type Category = "-" | "+";
 
 function Money() {
   const [selected, setSelected] = useState({
-    tags: [] as string[],
+    tagIds: [] as number[],
     note: "",
     category: "-" as Category,
     amount: 0,
@@ -43,13 +42,13 @@ function Money() {
 
   return (
     <MyLayout>
-      {selected.tags.join("")}
+      {/* {selected.tags.join("")}
       {selected.note}
-      {selected.category}
+      {selected.category} */}
       {selected.amount}
       <TagsSection
-        value={selected.tags}
-        onChange={(tags) => onChange({ tags })}
+        value={selected.tagIds}
+        onChange={(tagIds) => onChange({ tagIds })}
       />
       <NoteSection
         value={selected.note}

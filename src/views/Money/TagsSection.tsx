@@ -4,7 +4,6 @@ import { useTags } from "useTags";
 const Wrapper = styled.section`
   background: #ffffff;
   padding: 12px 16px;
-  flex-grow: 1; //如果有空间, 就给该标签尽可能高的高度
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -35,8 +34,8 @@ const Wrapper = styled.section`
 
 type Props = {
   // value: string[];
-  value: string[];
-  onChange: (selected: string[]) => void;
+  value: number[];
+  onChange: (selected: number[]) => void;
 };
 
 // const X:React.FC = ()...
@@ -48,25 +47,25 @@ const TagsSection: React.FC<Props> = (props) => {
   const { tags, setTags } = useTags();
   // const [tags, setTags] = useState<string[]>(["衣", "食", "住"]);
   // const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const selectedTags = props.value;
+  const selectedTagIds = props.value;
   const onAddTag = () => {
     const tagName = window.prompt("新增标签");
     if (tagName !== null) {
-      setTags([...tags, tagName]);
+      setTags([...tags, { id: Math.random(), name: tagName }]);
     }
   };
-  const onToggleTag = (tag: string) => {
-    const index = selectedTags.indexOf(tag);
+  const onToggleTag = (tagId: number) => {
+    const index = selectedTagIds.indexOf(tagId);
     if (index >= 0) {
       //如果tag已被选择, 则筛选出其他没被选中的tag, 复制一份当做新的selectedTag
-      props.onChange(selectedTags.filter((t) => t !== tag));
+      props.onChange(selectedTagIds.filter((t) => t !== tagId));
     } else {
-      props.onChange([...selectedTags, tag]);
+      props.onChange([...selectedTagIds, tagId]);
     }
   };
   //抽取className, 做选中处理
-  const getClass = (tag: string) => {
-    return selectedTags.indexOf(tag) >= 0 ? "selected" : "";
+  const getClass = (tagId: number) => {
+    return selectedTagIds.indexOf(tagId) >= 0 ? "selected" : "";
   };
 
   return (
@@ -74,13 +73,13 @@ const TagsSection: React.FC<Props> = (props) => {
       <ol>
         {tags.map((tag) => (
           <li
-            key={tag}
+            key={tag.id}
             onClick={() => {
-              onToggleTag(tag);
+              onToggleTag(tag.id);
             }}
-            className={getClass(tag)}
+            className={getClass(tag.id)}
           >
-            {tag}
+            {tag.name}
           </li>
         ))}
       </ol>

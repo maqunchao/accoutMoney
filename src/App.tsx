@@ -5,6 +5,7 @@ import Money from "views/Money";
 import Statistics from "views/Statistics";
 import NoMathch from "views/NoMathch";
 import styled from "styled-components";
+import { Tag } from "views/tag";
 
 const AppWrapper = styled.div`
   color: #333;
@@ -16,6 +17,8 @@ function App() {
       <HashRouter>
         <Routes>
           <Route path="/tags" element={<Tags />} />
+          <Route path="/tags/:tag" element={<Tag />} />
+
           <Route path="/money" element={<Money />} />
           <Route path="/statistics" element={<Statistics />} />
           <Route path="/" element={<Navigate to="/money" replace />} />
