@@ -56,6 +56,7 @@ const TagsSection: React.FC<Props> = (props) => {
       setTags([...tags, { id: creatId(), name: tagName }]);
     }
   };
+  //tag点击后的事件处理, 以及将值传递给父组件
   const onToggleTag = (tagId: number) => {
     const index = selectedTagIds.indexOf(tagId);
     if (index >= 0) {
