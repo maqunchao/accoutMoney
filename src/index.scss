@@ -19,8 +19,9 @@ ul, ol{
 a{
     text-decoration: none;  //消除a标签下划线
 }
-button {
-    font-family: inherit;
+button input{
+    // font-family: inherit;
+    font:inherit;
 }
 body{
     font-family: $font-hei;

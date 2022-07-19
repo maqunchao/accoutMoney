@@ -25,10 +25,10 @@ const NavWrapper = styled.nav`
           width: 22px;
           height: 22px;
         }
-        &.selected{
-          color:red;
-          .icon{
-            fill:red;
+        &.selected {
+          color: red;
+          .icon {
+            fill: red;
           }
         }
       }
@@ -41,30 +41,29 @@ const Nav = () => {
     <NavWrapper>
       <ul>
         <li>
-          <NavLink 
+          <NavLink
             to="/tags"
-            className={({ isActive }) => (isActive ? 'selected' : 'unselected')}
-
+            className={({ isActive }) => (isActive ? "selected" : "unselected")}
           >
             <Icon name="tag" />
             标签页1
           </NavLink>
         </li>
         <li>
-          <NavLink 
+          <NavLink
             to="/money"
-            className={({ isActive }) => (isActive ? 'selected' : 'unselected')}
+            className={({ isActive }) => (isActive ? "selected" : "unselected")}
           >
             <Icon name="money" />
             记账页
           </NavLink>
         </li>
         <li>
-          <NavLink 
+          <NavLink
             to="/statistics"
-            className={({ isActive }) => (isActive ? 'selected' : 'unselected')}
+            className={({ isActive }) => (isActive ? "selected" : "unselected")}
           >
-            <Icon name="charts" />
+            <Icon name="chart" />
             统计页
           </NavLink>
         </li>

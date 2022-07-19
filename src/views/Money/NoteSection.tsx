@@ -1,11 +1,12 @@
-import React, { useRef, useState } from "react";
+import { Input } from "components/Input";
+import React, { ChangeEventHandler, useRef, useState } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.section`
   background: #f5f5f5;
-  padding: 10px 16px;
+  padding: 14px 16px;
   font-size: 14px;
-  > label {
+  /* > label {
     display: flex;
     align-items: center;
     > span {
@@ -19,7 +20,7 @@ const Wrapper = styled.section`
       border: none;
       background: none;
     }
-  }
+  } */
 `;
 
 type Props = {
@@ -45,11 +46,22 @@ const NoteSection: React.FC<Props> = (props) => {
     props.onChange(value);
   };
 
+  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    props.onChange(e.target.value);
+  };
+
   const refInput = useRef<HTMLInputElement>(null);
 
   return (
     <Wrapper>
-      <label>
+      <Input
+        label="备注"
+        type="text"
+        value={note}
+        onChange={onChange}
+        placeholder="请填写备注"
+      />
+      {/* <label>
         <span>备注</span>
         <input
           type="text"
@@ -60,7 +72,7 @@ const NoteSection: React.FC<Props> = (props) => {
           }}
           ref={refInput}
         />
-      </label>
+      </label> */}
     </Wrapper>
   );
 };
