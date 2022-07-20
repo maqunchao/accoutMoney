@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Tag } from "views/tag";
 import { creatId } from "./lib/creatId";
 
@@ -12,7 +12,19 @@ let defaultTags = [
 
 //封装一个自定义的Hook
 const useTags = () => {
-  const [tags, setTags] = useState<{ id: number; name: string }[]>(defaultTags);
+  const [tags, setTags] = useState<{ id: number; name: string }[]>([]);
+
+  //didmount
+  useEffect(() => {
+    console.log("12122");
+    setTags(JSON.parse(window.localStorage.getItem("tags") || "[]"));
+  }, []);
+  //监听tags的改变
+  useEffect(() => {
+    console.log(tags);
+    window.localStorage.setItem("tags", JSON.stringify(tags));
+  }, [tags]);
+
   const findTag = (id: number) => tags.filter((tag) => tag.id === id)[0];
 
   const findTagIndex = (id: number) => {
@@ -26,6 +38,12 @@ const useTags = () => {
       }
     }
     return result;
+  };
+  const addTag = () => {
+    const tagName = window.prompt("新增标签");
+    if (tagName !== null) {
+      setTags([...tags, { id: creatId(), name: tagName }]);
+    }
   };
   const updateTag = (id: number, obj: { name: string }) => {
     // //找到需要更改的tag的下标
@@ -57,6 +75,7 @@ const useTags = () => {
   return {
     tags,
     setTags,
+    addTag,
     findTag,
     updateTag,
     findTagIndex,
