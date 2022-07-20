@@ -1,6 +1,6 @@
 import React from "react";
 import { useTags } from "useTags";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Layout from "components/Layout";
 import styled from "styled-components";
 import Icon from "components/Icon";
@@ -67,11 +67,17 @@ const Tag: React.FC = () => {
       </div>
     );
   };
+  const history = useNavigate();
+  const onClickBack = () => {
+    console.log("123");
+    // window.history.back();
+    history(-1);
+  };
   return (
     <Layout>
       {/* <div>{tag.name}</div> */}
       <TopBar>
-        <Icon name="left" />
+        <Icon name="left" onClick={onClickBack} />
         <span>编辑标签</span>
         <Icon />
       </TopBar>
