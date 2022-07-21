@@ -16,13 +16,16 @@ const useTags = () => {
 
   //didmount
   useEffect(() => {
-    console.log("12122");
+    console.log("after");
     setTags(JSON.parse(window.localStorage.getItem("tags") || "[]"));
+    console.log("getItem");
   }, []);
   //监听tags的改变
   useEffect(() => {
-    console.log(tags);
+    console.log("tags改变", tags);
+
     window.localStorage.setItem("tags", JSON.stringify(tags));
+    console.log("setItem");
   }, [tags]);
 
   const findTag = (id: number) => tags.filter((tag) => tag.id === id)[0];
