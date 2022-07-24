@@ -40,6 +40,8 @@ function Money() {
     });
   };
 
+  const submit = () => {};
+
   return (
     <MyLayout>
       {/* {selected.tags.join("")}

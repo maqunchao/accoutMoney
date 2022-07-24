@@ -1,31 +1,47 @@
+import { UseUpdate } from "hooks/useUpdate";
+import { type } from "os";
 import React, { useState, useEffect } from "react";
 import { Tag } from "views/tag";
-import { creatId } from "./lib/creatId";
+import { creatId } from "../lib/creatId";
+
+type Item = {
+  id: number;
+  name: string;
+};
 
 //写在外面防止 每次调用useTags 都初始化， 导致creatId 自增
-let defaultTags = [
-  { id: creatId(), name: "衣" },
-  { id: creatId(), name: "食" },
-  { id: creatId(), name: "住" },
-  { id: creatId(), name: "行" },
-];
 
 //封装一个自定义的Hook
 const useTags = () => {
-  const [tags, setTags] = useState<{ id: number; name: string }[]>([]);
+  const [tags, setTags] = useState<Item[]>([]);
 
   //didmount
   useEffect(() => {
     console.log("after");
-    setTags(JSON.parse(window.localStorage.getItem("tags") || "[]"));
+    let localTags = JSON.parse(window.localStorage.getItem("tags") || "[]");
+
+    //假如为空的时候 才初始化赋值
+    if (localTags.length === 0) {
+      localTags = [
+        { id: creatId(), name: "衣" },
+        { id: creatId(), name: "食" },
+        { id: creatId(), name: "住" },
+        { id: creatId(), name: "行" },
+      ];
+    }
+    setTags(localTags);
     console.log("getItem");
   }, []);
   //监听tags的改变
-  useEffect(() => {
-    console.log("tags改变", tags);
+  // useEffect(() => {
+  //   console.log("tags改变", tags);
 
+  //   window.localStorage.setItem("tags", JSON.stringify(tags));
+  //   console.log("setItem");
+  // }, [tags]);
+
+  UseUpdate(() => {
     window.localStorage.setItem("tags", JSON.stringify(tags));
-    console.log("setItem");
   }, [tags]);
 
   const findTag = (id: number) => tags.filter((tag) => tag.id === id)[0];
@@ -44,7 +60,7 @@ const useTags = () => {
   };
   const addTag = () => {
     const tagName = window.prompt("新增标签");
-    if (tagName !== null) {
+    if (tagName !== null && tagName !== "") {
       setTags([...tags, { id: creatId(), name: tagName }]);
     }
   };
