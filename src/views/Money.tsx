@@ -5,6 +5,7 @@ import { CategorySection } from "./Money/CategorySection";
 import { TagsSection } from "./Money/TagsSection";
 import { NoteSection } from "./Money/NoteSection";
 import { NumberPadSection } from "./Money/NumberPadSection";
+import { UseRecord } from "hooks/useRecord";
 
 //单独设置money页面高度样式
 const MyLayout = styled(Layout)`
@@ -15,13 +16,17 @@ const MyLayout = styled(Layout)`
 
 type Category = "-" | "+";
 
+const defaultFormData = {
+  tagIds: [] as number[],
+  note: "",
+  category: "-" as Category,
+  amount: 0,
+};
+
 function Money() {
-  const [selected, setSelected] = useState({
-    tagIds: [] as number[],
-    note: "",
-    category: "-" as Category,
-    amount: 0,
-  });
+  const [selected, setSelected] = useState(defaultFormData);
+
+  const { records, addRecord } = UseRecord();
 
   //优化onChange
   // value={selected.note}
@@ -40,7 +45,13 @@ function Money() {
     });
   };
 
-  const submit = () => {};
+  const submit = () => {
+    if (addRecord(selected)) {
+      alert("保存成功");
+      //保存成功后, 重置money页面数据
+      setSelected(defaultFormData);
+    }
+  };
 
   return (
     <MyLayout>
@@ -63,7 +74,7 @@ function Money() {
       <NumberPadSection
         value={selected.amount}
         onChange={(amount) => onChange({ amount })}
-        onOK={() => {}}
+        onOK={submit}
       />
     </MyLayout>
   );
