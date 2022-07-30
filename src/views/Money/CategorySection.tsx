@@ -4,7 +4,6 @@ import styled from "styled-components";
 const Wrapper = styled.section`
   > ul {
     display: flex;
-    background: #c4c4c4;
     > li {
       width: 50%;
       text-align: center;
@@ -27,28 +26,25 @@ const Wrapper = styled.section`
 `;
 
 type Props = {
-  value : '-' | '+';
-  onChange:(value:'-' | '+') => void;
-}
-
+  value: "-" | "+";
+  onChange: (value: "-" | "+") => void;
+};
 
 const CategorySection: React.FC<Props> = (props) => {
-  const categoryMap = {'-':'支出','+':'收入' }
+  const categoryMap = { "-": "支出", "+": "收入" };
   type Keys = keyof typeof categoryMap;
   //const [categoryList] = useState<('-' | '+')[]>(['-', '+']);  //categoryList这个类型进行收缩到 只有-和+
-  const [categoryList] = useState<Keys[]>(['-', '+']);  //categoryList这个类型进行收缩到 只有-和+
-  
+  const [categoryList] = useState<Keys[]>(["-", "+"]); //categoryList这个类型进行收缩到 只有-和+
+
   // const [category, setCategory] = useState("-");
   const category = props.value;
-
 
   return (
     <Wrapper>
       <ul>
-        {
-          categoryList.map(x => {
-            return(
-              <li
+        {categoryList.map((x) => {
+          return (
+            <li
               key={x}
               className={category === x ? "selected" : ""}
               onClick={() => {
@@ -57,9 +53,8 @@ const CategorySection: React.FC<Props> = (props) => {
             >
               {categoryMap[x]}
             </li>
-            )
-          })
-        }
+          );
+        })}
         {/* <li
           className={category === "-" ? "selected" : ""}
           onClick={() => {

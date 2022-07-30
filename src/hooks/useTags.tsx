@@ -89,6 +89,10 @@ const useTags = () => {
     //filter会返回一个新的数组
     setTags(tags.filter((tag) => tag.id !== id));
   };
+  const getName = (id: number) => {
+    const tag = tags.filter((t) => t.id === id)[0];
+    return tag ? tag.name : "";
+  };
 
   //需要导出一个对象
   return {
@@ -99,6 +103,7 @@ const useTags = () => {
     updateTag,
     findTagIndex,
     deleteTag,
+    getName,
   };
 };
 

@@ -5,26 +5,27 @@ import { genertateOutput } from "./NumberPadSection/genertateOutput";
 
 type Props = {
   value: number;
-  onChange:(value:number) => void;
-  onOK?:()=>void;
-}
-
+  onChange: (value: number) => void;
+  onOK?: () => void;
+};
 
 const NumberPadSection: React.FC<Props> = (props) => {
   // const [output, _setOutput] = useState("0");
-const output = props.value.toString();
+  // const output = props.value.toString();
+  const [output, _setoutput] = useState(props.value.toString());
 
   //统一处理输入框数字长度问题, 并且长度为0时, 重置为0
   const setOutput = (output: string) => {
-    let value
+    let newoutput: string;
     if (output.length > 16) {
-      value = parseFloat( output.slice(0, 16));
+      newoutput = output.slice(0, 16);
     } else if (output.length === 0) {
-      value =  0;
+      newoutput = "0";
     } else {
-      value = parseFloat(output);
+      newoutput = output;
     }
-    props.onChange(value);
+    _setoutput(newoutput);
+    props.onChange(parseFloat(newoutput));
   };
 
   const onClickButtonWrapper = (e: React.MouseEvent) => {
@@ -34,10 +35,9 @@ const output = props.value.toString();
     if (text === null) {
       return;
     }
-    if(text === 'OK') {
-      if(props.onOK){
-        props.onOK()
-
+    if (text === "OK") {
+      if (props.onOK) {
+        props.onOK();
       }
       return;
     }
