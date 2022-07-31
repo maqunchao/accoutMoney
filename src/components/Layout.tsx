@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode, useEffect, useRef } from "react";
 import Nav from "./Nav";
 import styled from "styled-components";
 
@@ -15,21 +15,33 @@ const Main = styled.div`
   overflow: auto;
 `;
 
+type Props = {
+  className?: string;
+  scrollTop?: number;
+  children?: ReactNode;
+};
 
-
-// type Props = {
-//   title: string;
-// };
-
-const Layout = (props: any) => {
+const Layout: React.FC<Props> = (props) => {
+  const mainRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    setTimeout(() => {
+      if (!mainRef.current) {
+        return;
+      }
+      console.log(props.scrollTop);
+      mainRef.current.scrollTop = props.scrollTop!;
+    }, 0);
+  }, [props.scrollTop]);
   return (
     <Wrapper>
-      <Main className={props.className}>
-        {props.children}
-      </Main>
-      <Nav/>
+      <Main className={props.className}>{props.children}</Main>
+      <Nav />
     </Wrapper>
   );
+};
+//设置属性的默认值
+Layout.defaultProps = {
+  scrollTop: 0,
 };
 
 export default Layout;

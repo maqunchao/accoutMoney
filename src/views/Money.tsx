@@ -11,7 +11,7 @@ import { UseRecord } from "hooks/useRecord";
 const MyLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;
 
 type Category = "-" | "+";
@@ -58,7 +58,7 @@ function Money() {
   };
 
   return (
-    <MyLayout>
+    <MyLayout scrollTop={2000}>
       {/* {selected.tags.join("")}
       {selected.note}
       {selected.category} */}

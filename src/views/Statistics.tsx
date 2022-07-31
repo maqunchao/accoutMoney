@@ -40,7 +40,7 @@ function Statistics() {
   const selectedRecords = records.filter((r) => r.category === category);
 
   //创建数组， 日期相同的放到一组
-  selectedRecords.map((r) => {
+  selectedRecords.forEach((r) => {
     const key = day(r.createdAt).format("YYYY年MM月DD日");
     if (!(key in hash)) {
       hash[key] = [];
